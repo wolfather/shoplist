@@ -1,0 +1,37 @@
+[
+    {
+        "id": "01",
+        "product_name": "product 01",
+        "price": "200,99",
+        "stock": true,
+        "qty": 10
+    },
+    {
+        "id": "02",
+        "product_name": "product 02",
+        "price": "230,99",
+        "stock": true,
+        "qty": 12
+    },
+    {
+        "id": "03",
+        "product_name": "product 03",
+        "price": "200,99",
+        "stock": true,
+        "qty": 20
+    },
+    {
+        "id": "04",
+        "product_name": "product 04",
+        "price": "100,99",
+        "stock": false,
+        "qty": 0
+    },
+    {
+        "id": "05",
+        "product_name": "product 05",
+        "price": "1.200,99",
+        "stock": true,
+        "qty": 6
+    }
+]
