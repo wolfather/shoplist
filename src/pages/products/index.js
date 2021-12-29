@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import Loading from '../../components/loading';
 
-import { insertPrice } from '../../services/insert_price';
+import insertPrice from '../../services/insert_price';
 
 export default function ProductsPage(props) {
     const [products, setProducts] = useState([]);

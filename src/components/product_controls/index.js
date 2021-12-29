@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { ADD_ITEM_TO_CART } from '../../constants/theme';
+import { ADD_ITEM_TO_CART, INCREMENT_PRODUCT_QTDY } from '../../constants/theme';
 import { GlobalContext } from '../../services/context';
 import { Button, Container, InputQtdyProduct } from "./style";
 
 export default function AddQtdyProduct(props) {
-    const [value, setValue] = useState(1);
+    const [value, setValue] = useState(props.product.qtdy || 1);
     const ctx = useContext(GlobalContext);
     
     const minusQtdy = () => {
@@ -13,10 +13,17 @@ export default function AddQtdyProduct(props) {
     };
     const plusQtdy = () => {
         const val = value + 1;
+        if(props.product.qtdy) {
+            ctx.dispatch({
+                type: INCREMENT_PRODUCT_QTDY,
+                payload: {id: props.id, qtdy: value}
+            });
+        }
+
         setValue(val);
     };
 
-    const clickToBuy = e => {
+    const clickToBuy = () => {
         ctx.dispatch({
             type: ADD_ITEM_TO_CART,
             payload: {id: props.id, qtdy: value}

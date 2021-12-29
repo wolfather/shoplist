@@ -1,4 +1,4 @@
-import { ADD_ITEM_TO_CART, CHANGE_CURRENT_THEME } from '../../constants/theme';
+import { ADD_ITEM_TO_CART, CHANGE_CURRENT_THEME, DECREMENT_PRODUCT_QTDY, INCREMENT_PRODUCT_QTDY } from '../../constants/theme';
 import { initialState } from '../../state/initial_state';
 
 export const themeReducer = (state = initialState, action) => {
@@ -13,6 +13,15 @@ export const themeReducer = (state = initialState, action) => {
         case ADD_ITEM_TO_CART:
             const _shopcart = addProductInCart(state)(action);
             return {...state, shopcart: _shopcart };
+
+        case INCREMENT_PRODUCT_QTDY:
+            const _productIncrement = findProductInShopcartById(state)(action);
+            console.log(_productIncrement);
+            return {...state };
+
+        case DECREMENT_PRODUCT_QTDY:
+            const _productDecrement = findProductInShopcartById(state)(action);
+            return {...state };
 
         default: return {...state};
     }

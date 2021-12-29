@@ -1,7 +1,6 @@
-export function insertPrice(props) {
+export default function insertPrice(props) {
     const value = Math.round(Math.random() * 9999).toFixed(2);
-
-    const price = formatPrice(value);
+    const price = formatPrice(value * props.qtdy || 1);
 
     return {...props, price};
 }
