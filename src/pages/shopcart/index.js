@@ -1,20 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../services/context';
-import getProductById from '../../repositories/getproductsbyid';
 import insertPrice from '../../services/insert_price';
 import AddQtdyProduct from '../../components/product_controls';
-import axios from 'axios';
+import getProductsShopcartRepository from '../../repositories/getProductsShopcart';
 
 export default function ShopcartPage(props) {
     const [shopcart, setShopcart] = useState([]);
     const ctx = useContext(GlobalContext);
-    console.log(ctx);
+    // console.log(ctx);
     
     useEffect(() => {
-        const productsFetches = ctx.state.shopcart.map(item => getProductById({productId: item.id}));
         let shopcartTemp = [];
     
-        axios.all(productsFetches)
+        getProductsShopcartRepository(ctx)
             .then(results => {
                 shopcartTemp = results.map(result => {
                     let item = result.data[0];
@@ -31,17 +29,6 @@ export default function ShopcartPage(props) {
             })
             .catch(err => console.log('err shopcart', err));;
     }, [ctx]);
-
-    const minusQtdy = item => {
-        const qtdy = (item.qtdy > 1 ? (item.qtdy - 1) : 1)
-        const val = {...shopcart, qtdy};
-        setShopcart(val);
-    };
-    const plusQtdy = item => {
-        const qtdy = item.qtdy + 1;
-        const val = {...shopcart, qtdy};
-        setShopcart(val);
-    };
 
     console.log(shopcart);
 

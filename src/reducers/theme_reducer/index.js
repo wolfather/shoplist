@@ -15,13 +15,10 @@ export const themeReducer = (state = initialState, action) => {
             return {...state, shopcart: _shopcart };
 
         case INCREMENT_PRODUCT_QTDY:
-            const _productIncrement = findProductInShopcartById(state)(action);
-            console.log(_productIncrement);
-            return {...state };
+            return {...state, shopcart: alterProductQtdy(state)(action) };
 
         case DECREMENT_PRODUCT_QTDY:
-            const _productDecrement = findProductInShopcartById(state)(action);
-            return {...state };
+            return {...state, shopcart: alterProductQtdy(state)(action) };
 
         default: return {...state};
     }
@@ -32,8 +29,15 @@ export const findThemeByAlias = state => action => (
 );
 
 export const findProductInShopcartById = state => action => (
-    state.shopcart.find(item => item.id === action.payload.id)
+    state.shopcart.find(item => parseInt(item.id) === action.payload.id)
 );
+
+export const alterProductQtdy = state => action => {
+    const {payload: {id, qtdy}} = action;
+
+    return state.shopcart.map(item => parseInt(item.id) === id ? {...item, qtdy} : item);
+};
+
 
 export const addProductInCart = state => action => {
     let _shopcart = state.shopcart.length ? state.shopcart : [];

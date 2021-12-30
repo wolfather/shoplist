@@ -18,6 +18,7 @@ export default function ProductsPage(props) {
             .then(
                 res => {
                     const products = res.data.map(product => insertPrice(product))
+                    console.log(products);
                     setProducts(products);
                 })
             .catch(error => console.log('error getByAlbumID', error));
@@ -27,6 +28,5 @@ export default function ProductsPage(props) {
         <h1>Products</h1>
 
         <>{products.length ? <ProductsList products={products} /> : <Loading duration="3s" spinningColor="#fc0" /> }</>
-
     </>);
 }
