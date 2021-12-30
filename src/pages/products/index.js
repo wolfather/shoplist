@@ -18,7 +18,6 @@ export default function ProductsPage(props) {
             .then(
                 res => {
                     const products = res.data.map(product => insertPrice(product))
-                    console.log(products);
                     setProducts(products);
                 })
             .catch(error => console.log('error getByAlbumID', error));
