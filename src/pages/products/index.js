@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 
 import Loading from '../../components/loading';
 
-import { insertPrice } from '../../services/insert_price';
+import insertPrice from '../../services/insert_price';
+import Header from '../../components/header';
 
 export default function ProductsPage(props) {
     const [products, setProducts] = useState([]);
@@ -24,9 +25,9 @@ export default function ProductsPage(props) {
     }, [_fetch, id]);
 
     return (<>
+        <Header />
         <h1>Products</h1>
 
         <>{products.length ? <ProductsList products={products} /> : <Loading duration="3s" spinningColor="#fc0" /> }</>
-
     </>);
 }

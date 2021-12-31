@@ -9,7 +9,7 @@ export default function ListLinks(props) {
     const [links, setLinks] = useState([]);
     
     useEffect(() => {
-        const listLinks = productFactory({qtdy: Math.round(Math.random() * 100)});
+        const listLinks = productFactory({qtdy: Math.round(Math.random()+1 * 100)});
         
         setLinks(listLinks);
     }, []);
