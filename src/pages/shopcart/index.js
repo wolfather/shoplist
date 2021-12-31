@@ -3,6 +3,7 @@ import { GlobalContext } from '../../services/context';
 import insertPrice, { formatPrice } from '../../services/insert_price';
 import AddQtdyProduct from '../../components/product_controls';
 import getProductsShopcartRepository from '../../repositories/getProductsShopcart';
+import { Link } from 'react-router-dom';
 
 export default function ShopcartPage(props) {
     const [shopcart, setShopcart] = useState([]);
@@ -74,6 +75,9 @@ export default function ShopcartPage(props) {
                     </tr>
                 </tfoot>
             </table>
+        </div>
+        <div>
+            <Link to='/checkout'>Fechar pedido</Link>
         </div>
     </>);
 }
