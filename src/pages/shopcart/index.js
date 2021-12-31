@@ -1,17 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../services/context';
-import insertPrice from '../../services/insert_price';
+import insertPrice, { formatPrice } from '../../services/insert_price';
 import AddQtdyProduct from '../../components/product_controls';
 import getProductsShopcartRepository from '../../repositories/getProductsShopcart';
 
 export default function ShopcartPage(props) {
     const [shopcart, setShopcart] = useState([]);
+    const [totalShopcartValue, setTotalShopcartValue] = useState('R$ 0');
     const ctx = useContext(GlobalContext);
+
     // console.log(ctx);
     
     useEffect(() => {
         let shopcartTemp = [];
-    
+        let totalValue = 0;
+
         getProductsShopcartRepository(ctx)
             .then(results => {
                 shopcartTemp = results.map(result => {
@@ -25,12 +28,14 @@ export default function ShopcartPage(props) {
                     return item;
                 });
 
-                setShopcart(shopcartTemp);
-            })
-            .catch(err => console.log('err shopcart', err));;
-    }, [ctx]);
+                shopcartTemp.forEach(item => totalValue += item.rawPrice);
 
-    console.log(shopcart);
+                setShopcart(shopcartTemp);
+                setTotalShopcartValue(formatPrice(totalValue));
+
+            })
+            .catch(err => console.log('err shopcart', err));
+    }, [ctx]);
 
     return (<>
         <h1>Shopcart</h1>
@@ -60,8 +65,14 @@ export default function ShopcartPage(props) {
                         </td>
                         <td>{item.price}</td>
                     </tr>))}
-                    
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colSpan={2}>Total <strong>{totalShopcartValue}</strong></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </>);
