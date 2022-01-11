@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should have a snapshot 1`] = `
+<p>
+  Sem produtos no momento
+</p>
+`;
